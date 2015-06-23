@@ -15,8 +15,8 @@ int menu_selection = 1;
 int array_bubble = 0;
 int array_selection = 0;
 int ppp = 0;
-Minim select_sound, enter_sound, back_sound;
-AudioPlayer select_player, enter_player, back_player;
+Minim select_sound, enter_sound, back_sound, error_sound;
+AudioPlayer select_player, enter_player, back_player, error_player;
 
 void setup()
 {  
@@ -39,9 +39,11 @@ void setup()
   select_sound = new Minim(this);
   enter_sound = new Minim(this);
   back_sound = new Minim(this);
+  error_sound = new Minim(this);
   select_player = select_sound.loadFile("sound_select_menu.mp3");
   enter_player = enter_sound.loadFile("sound_enter_menu.mp3");
   back_player = back_sound.loadFile("sound_back_menu.wav");
+  error_player = error_sound.loadFile("sound_error_menu.wav");
 }
 
 void draw()
@@ -86,6 +88,9 @@ void draw()
    }
    if(key == ENTER)
    {
+     if(menu_selection==3)
+     error_player.play(0);
+     else
      enter_player.play(700);     
      scelta = menu_selection;  
    }
@@ -119,7 +124,8 @@ void draw()
         text("QUICKSORT", 430, 340);
       }  
     }
+    
+    textSize(15);
+    fill(#8CD88C);
+    text("v.1.0 - GitHub mns23 - 2015", 700, 460);
   }
-  
-  
-  //RUMORE QUICK
